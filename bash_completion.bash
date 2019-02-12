@@ -148,7 +148,7 @@ _mvn()
     local plugin_goals_enforcer="enforcer:enforce|enforcer:display-info"
     local plugin_goals_exec="exec:exec|exec:java"
     local plugin_goals_failsafe="failsafe:integration-test|failsafe:verify"
-    local plugin_goals_flyway="flyway:migrate|flyway:clean|flyway:info|flyway:validate|flyway:baseline|flyway:repair"
+    local plugin_goals_flyway="flyway:clean|flyway:history|flyway:init|flyway:migrate|flyway:status|flyway:validate"
     local plugin_goals_gpg="gpg:sign|gpg:sign-and-deploy-file"
     local plugin_goals_grails="grails:clean|grails:config-directories|grails:console|grails:create-controller|grails:create-domain-class|grails:create-integration-test|grails:create-pom|grails:create-script|grails:create-service|grails:create-tag-lib|grails:create-unit-test|grails:exec|grails:generate-all|grails:generate-controller|grails:generate-views|grails:help|grails:init|grails:init-plugin|grails:install-templates|grails:list-plugins|grails:maven-clean|grails:maven-compile|grails:maven-functional-test|grails:maven-grails-app-war|grails:maven-test|grails:maven-war|grails:package|grails:package-plugin|grails:run-app|grails:run-app-https|grails:run-war|grails:set-version|grails:test-app|grails:upgrade|grails:validate|grails:validate-plugin|grails:war"
     local plugin_goals_gwt="gwt:browser|gwt:clean|gwt:compile|gwt:compile-report|gwt:css|gwt:debug|gwt:eclipse|gwt:eclipseTest|gwt:generateAsync|gwt:help|gwt:i18n|gwt:mergewebxml|gwt:resources|gwt:run|gwt:run-codeserver|gwt:sdkInstall|gwt:source-jar|gwt:soyc|gwt:test"
@@ -160,17 +160,17 @@ _mvn()
     local plugin_goals_javadoc="javadoc:javadoc|javadoc:jar|javadoc:aggregate"
     local plugin_goals_jboss="jboss:start|jboss:stop|jboss:deploy|jboss:undeploy|jboss:redeploy"
     local plugin_goals_jboss_as="jboss-as:add-resource|jboss-as:deploy|jboss-as:deploy-only|jboss-as:deploy-artifact|jboss-as:redeploy|jboss-as:redeploy-only|jboss-as:undeploy|jboss-as:undeploy-artifact|jboss-as:run|jboss-as:start|jboss-as:shutdown|jboss-as:execute-commands"
-    local plugin_goals_jetty="jetty:run|jetty:run-exploded|jetty:run-forked"
+    local plugin_goals_jetty="jetty:run|jetty:run-exploded"
     local plugin_goals_jxr="jxr:jxr"
     local plugin_goals_license="license:format|license:check"
     local plugin_goals_liquibase="liquibase:changelogSync|liquibase:changelogSyncSQL|liquibase:clearCheckSums|liquibase:dbDoc|liquibase:diff|liquibase:dropAll|liquibase:help|liquibase:migrate|liquibase:listLocks|liquibase:migrateSQL|liquibase:releaseLocks|liquibase:rollback|liquibase:rollbackSQL|liquibase:status|liquibase:tag|liquibase:update|liquibase:updateSQL|liquibase:updateTestingRollback"
     local plugin_goals_nexus_staging="nexus-staging:close|nexus-staging:deploy|nexus-staging:deploy-staged|nexus-staging:deploy-staged-repository|nexus-staging:drop|nexus-staging:help|nexus-staging:promote|nexus-staging:rc-close|nexus-staging:rc-drop|nexus-staging:rc-list|nexus-staging:rc-list-profiles|nexus-staging:rc-promote|nexus-staging:rc-release|nexus-staging:release"
     local plugin_goals_pmd="pmd:pmd|pmd:cpd|pmd:check|pmd:cpd-check"
-    local plugin_goals_properties="properties:read-project-properties|properties:write-project-properties|properties:write-active-profile-properties|properties:set-system-properties"
-    local plugin_goals_release="release:clean|release:prepare|release:rollback|release:perform|release:stage|release:branch|release:update-versions"
+    local plugin_goals_release="release:clean|release:prepare|release:rollback|release:perform|release:stage|release:branch|release:update-versions|release:help"
+    local options_plugin_release_help="-Ddetail=true|-Dgoal="
     local plugin_goals_repository="repository:bundle-create|repository:bundle-pack|repository:help"
-    local plugin_goals_scala="scala:add-source|scala:cc|scala:cctest|scala:compile|scala:console|scala:doc|scala:doc-jar|scala:help|scala:run|scala:script|scala:testCompile"
     local plugin_goals_scm="scm:add|scm:checkin|scm:checkout|scm:update|scm:status"
+    local plugin_goals_scm_publish="scm-publish:publish-scm"
     local plugin_goals_site="site:site|site:deploy|site:run|site:stage|site:stage-deploy"
     local plugin_goals_sonar="sonar:sonar|sonar:help"
     local plugin_goals_source="source:aggregate|source:jar|source:jar-no-fork"
@@ -179,7 +179,8 @@ _mvn()
     local plugin_goals_tomcat7="tomcat7:help|tomcat7:run|tomcat7:run-war|tomcat7:run-war-only|tomcat7:deploy"
     local plugin_goals_tomcat="tomcat:help|tomcat:start|tomcat:stop|tomcat:deploy|tomcat:undeploy"
     local plugin_goals_liberty="liberty:create-server|liberty:start-server|liberty:stop-server|liberty:run-server|liberty:deploy|liberty:undeploy|liberty:java-dump-server|liberty:dump-server|liberty:package-server"
-    local plugin_goals_versions="versions:display-dependency-updates|versions:display-plugin-updates|versions:display-property-updates|versions:update-parent|versions:update-properties|versions:update-child-modules|versions:lock-snapshots|versions:unlock-snapshots|versions:resolve-ranges|versions:set|versions:use-releases|versions:use-next-releases|versions:use-latest-releases|versions:use-next-snapshots|versions:use-latest-snapshots|versions:use-next-versions|versions:use-latest-versions|versions:commit|versions:revert"
+    local plugin_goals_versions="versions:commit|versions:compare-dependencies|versions:dependency-updates-report|versions:display-dependency-updates|versions:display-parent-updates|versions:display-plugin-updates|versions:display-property-updates|versions:force-releases|versions:lock-snapshots|versions:plugin-updates-report|versions:property-updates-report|versions:resolve-ranges|versions:revert|versions:set|versions:unlock-snapshots|versions:update-child-modules|versions:update-parent|versions:update-properties|versions:update-property|versions:use-latest-releases|versions:use-latest-snapshots|versions:use-latest-versions|versions:use-next-releases|versions:use-next-snapshots|versions:use-next-versions|versions:use-reactor|versions:use-releases"
+		local	options_plugin_versions_set="-DnewVersion=|-DallowSnapshots=|-DartifactId=|-DgroupId=|-DgenerateBackupPoms=false|-DnextSnapshot=true|-DoldVersion=|-DprocessAllModules=true|-DprocessDependencies=false|-DprocessParent=false|-DprocessPlugins=false|-DprocessProject=false|-DremoveSnapshot=true|-Dmaven.version.rules=|-Dmaven.version.rules.serverId=|-DupdateMatchingVersions=false"
     local plugin_goals_vertx="vertx:init|vertx:runMod|vertx:pullInDeps|vertx:fatJar"
     local plugin_goals_war="war:war|war:exploded|war:inplace|war:manifest"
     local plugin_goals_spring_boot="spring-boot:run|spring-boot:repackage"
@@ -189,7 +190,7 @@ _mvn()
     ## some plugin (like jboss-as) has '-' which is not allowed in shell var name, to use '_' then replace
     local common_plugins=`compgen -v | grep "^plugin_goals_.*" | sed 's/plugin_goals_//g' | tr '_' '-' | tr '\n' '|'`
 
-    local options="-Dmaven.test.skip=true|-DskipTests|-DskipITs|-Dtest|-Dit.test|-DfailIfNoTests|-Dmaven.surefire.debug|-DenableCiProfile|-Dpmd.skip=true|-Dcheckstyle.skip=true|-Dtycho.mode=maven|-Dmaven.javadoc.skip=true|-Dgwt.compiler.skip|-Dcobertura.skip=true|-Dfindbugs.skip=true||-DperformRelease=true|-Dgpg.skip=true|-DforkCount"
+    local options="-Dmaven.test.skip=true|-DskipTests|-DskipITs|-Dtest|-Dit.test|-DfailIfNoTests|-Dmaven.surefire.debug|-DenableCiProfile|-Dpmd.skip=true|-Dcheckstyle.skip=true|-Dtycho.mode=maven|-Dmaven.javadoc.skip=true|-Dgwt.compiler.skip|-Dcobertura.skip=true|-Dfindbugs.skip=true||-DperformRelease=true|-Dgpg.skip=true|-DforkCount|-Drat.ignoreErrors=true|-Drat.skip=true|-Dinvoker.test|-Dinvoker.javaHome=|-Dinvoker.mergeUserSettings=true|-Denforcer.skip=true"
 
     local profile_settings=`[ -e ~/.m2/settings.xml ] && grep -e "<profile>" -A 1 ~/.m2/settings.xml | grep -e "<id>.*</id>" | sed 's/.*<id>//' | sed 's/<\/id>.*//g' | tr '\n' '|' `
     
@@ -202,7 +203,15 @@ _mvn()
 
     local IFS=$'|\n'
 
-    if [[ ${cur} == -D* ]] ; then
+    if [[ ${prev} == *:* ]] ; then
+				local plugin=$(echo -n "${prev}" | cut -d ":" -f1 | tr -c -d '[:alpha:]')
+				local goal=$(echo -n "${prev}" | cut -d ":" -f2 | tr -c -d '[:alpha:]')
+#    		if [[ ${cur} == -* ]] ; then
+					local plugin_option="options_plugin_${plugin}_${goal}"
+					COMPREPLY=( $(compgen -W "${!plugin_option}" -S ' ' -- ${cur}) )
+#				fi
+
+    elif [[ ${cur} == -D* ]] ; then
       COMPREPLY=( $(compgen -S ' ' -W "${options}" -- ${cur}) )
 
     elif [[ ${prev} == -P ]] ; then
@@ -232,6 +241,7 @@ _mvn()
         local plugin
         for plugin in $common_plugins; do
           if [[ ${cur} == ${plugin}:* ]]; then
+						#echo "Cur:${cur} ${plugin}"
             ## note that here is an 'unreplace', see the comment at common_plugins
             var_name="plugin_goals_${plugin//-/_}"
             COMPREPLY=( $(compgen -W "${!var_name}" -S ' ' -- ${cur}) )
